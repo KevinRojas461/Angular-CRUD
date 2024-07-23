@@ -1,0 +1,91 @@
+<div class="container mt-4">
+    <div class="card">
+        <h1>Student Registation</h1>
+
+        <form>
+            <!-- stname -->
+            <div class="form-group">
+                <label>Student Name</label>
+                <!-- -->
+                <!-- Usas [(ngModel)] para enlazar los campos del formulario a -->
+                <!-- las variables del componente. Esto asegura que las variables -->
+                <!-- se actualicen automáticamente con los valores del formulario -->
+
+
+                <!-- -->
+                <!-- [ngModelOptions]="{standalone: true}" es para darle -->
+                <!-- valores a los campos de fromulario cuando se quiere editar -->
+                <!-- y sabe que debe mostrar en cada campo gracias a -->
+                <!-- [(ngModel)]="stname" entonces como es "stname" -->
+                <!-- en este campo para digitar el nombre del estudiante -->
+                <!-- muestra el nombredel estudiante -->
+                <input type="text" [(ngModel)]="stname" [ngModelOptions]="{standalone: true}" class="form-control"
+                    id="stname" placeholder="Enter Name">
+            </div>
+
+            <div class="form-group">
+                <label>Course</label>
+                <input type="text" [(ngModel)]="course" [ngModelOptions]="{standalone: true}" class="form-control"
+                    id="course" placeholder="Enter Name">
+            </div>
+
+            <div class="form-group">
+                <label>Fee</label>
+                <input type="text" [(ngModel)]="fee" [ngModelOptions]="{standalone: true}" class="form-control" id="fee"
+                    placeholder="Enter Fee">
+            </div>
+
+            <!-- (click)="save()" -->
+            <!-- (click) es para llamar un metodo del controlador -->
+            <button type="submit" class="btn btn-primary mt-4" (click)="save()">Save</button>
+
+        </form>
+    </div>
+
+
+
+    <div class="container mt-4">
+        <h1>Student Table</h1>
+        <table class="table">
+            <thead>
+                <!--  -->
+                <!-- mientas la tabla accede a los registros de la bd -->
+                <!-- va amostar el cargando -->
+                 
+                <!-- si no cargaron los datos muestre loading -->
+                <!-- !isResultLoaded 0 isResultLoaded = false -->
+                <!-- si cargaron los datos de la tabla entonces no entra -->
+                <!-- al Loading -->
+                <h1 *ngIf="!isResultLoaded">Loading.................</h1>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Fee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- -->
+                <!-- ngFor para recorrer cada registro de la lista StudentArray -->
+                <!-- "StudentItem" es cada registro de la lista StudentArray -->
+                <tr *ngFor="let StudentItem of StudentArray">
+                    <td>{{StudentItem.id }}</td>
+                    <td>{{StudentItem.stname }}</td>
+                    <td>{{StudentItem.course }}</td>
+                    <td>{{StudentItem.fee }}</td>
+                    <td>
+                        <!--  -->
+                        <!-- cada registro tiene sus botones -->
+                        <!-- (click)="setUpdate(StudentItem) -->
+                        <!-- estoy llamando al metodo "setUpdate" del cotrolador -->
+                        <!-- y le esyoy pasando StudentItem al metodo "setUpdate" -->
+                        <!-- StudentItem tiene todos los campos/datos -->
+                        <!-- del registro que se selecciono para editar -->
+                        <button type="button" class="btn btn-success" (click)="setUpdate(StudentItem)">Edit</button>
+                        <button type="button" class="btn btn-danger" (click)="setDelete(StudentItem)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>    
